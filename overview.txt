@@ -1,0 +1,50 @@
+- Max Khan (9/7/2023)
+
+===================================
+WALKTHROUGH
+===================================
+
+It was very clear from the instructions that I needed to write an HTTP
+server in Go, and that I ultimately showoff using one endpoint to invoke 
+another. 
+
+Every standard HTTP application has a root, so the three endpoints included
+for this server are: 
+- /
+- /request 
+- /secondary 
+
+The /request endpoint is the first endpoint that receives our JSON data. It 
+validates that the shape of the JSON is correct given the definition of our 
+Advertisement object, and sends it off to the secondary endpoint if correct. 
+
+Since the instructions for how I was to invoke the secondary endpoint were 
+ambiguous, I decided to show off my knowledge of using a new client object 
+to invoke the local application through a standard HTTP request, rather than 
+just invoking the function of /secondary directly. 
+
+===================================
+SOLUTION OVERVIEW
+===================================
+
+The /request endpoint validates that the JSON received matches our Advertisement 
+structure, and invokes /secondary if it was successful in doing so. 
+
+Type "make run" in the console to build and run the application. 
+
+===================================
+CHALLENGES, CONSIDERATIONS, REQUIREMENTS
+===================================
+
+I originally considered making the application a docker container as a final 
+solution, but deemed it overkill for the challenge since the code fit in one 
+file. 
+
+I also considered using a master YAML/JSON file to create endpoint definitions 
+that could be used to autogenerate entrypoint code, but also found it overkill. 
+
+Finally, I actively chose to not include "go" keyword to invoke the /secondary 
+endpoint to showcase that I wanted it to be a blocking operation. 
+
+Testing in main_test.go was essential in proving that my code worked as intended. 
+Feel free to give it a try by typing "make test" in the console. 
